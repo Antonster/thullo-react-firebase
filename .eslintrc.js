@@ -32,6 +32,7 @@ module.exports = {
 		'@typescript-eslint/no-unused-vars': ['error'],
 		// Custom
 		"no-param-reassign": 0,
-		"import/prefer-default-export": 0
+		"import/prefer-default-export": 0,
+		"react/jsx-props-no-spreading": "off",
 	},
 };
