@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
+import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
@@ -9,6 +8,7 @@ import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import AppsRoundedIcon from '@mui/icons-material/AppsRounded';
 import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { thulloImage } from 'src/assets/images';
 import { MainButton } from 'src/components';
@@ -29,7 +29,7 @@ const Header: React.FC = () => {
   const fakeUserName = 'User User';
   const fakeNickname = 'Xanthe Neal';
   const [tooltip, setTooltip] = useState(false);
-  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const handleTooltipClose = () => {
     setTooltip(false);

@@ -1,4 +1,3 @@
-import React from 'react';
 import type { IMainButton } from 'src/interfaces';
 
 import * as S from './styles';

@@ -1,17 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Header, ContentWrapper } from 'src/components';
 
 import 'src/firebase';
 import { authActionCreator } from 'src/store/actions';
+import { Header, ContentWrapper, Waiter } from 'src/components';
 
 import type { RootState } from 'src/store/store';
 
 const App: React.FC = () => {
   const { login } = useSelector((root: RootState) => root.auth);
   const dispatch = useDispatch();
+  const [waiter, setWaiter] = useState(false);
 
   // useEffect(() => {
   //   dispatch(
@@ -45,6 +46,7 @@ const App: React.FC = () => {
           <Route path="*" element={<div>404</div>} />
         </Routes>
       </ContentWrapper>
+      {waiter && <Waiter size="30px" />}
     </>
   );
 };
