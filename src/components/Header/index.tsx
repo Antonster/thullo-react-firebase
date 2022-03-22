@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { styled } from '@mui/material/styles';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
@@ -11,18 +9,8 @@ import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { thulloImage } from 'src/assets/images';
-import { MainButton } from 'src/components';
+import { SecondaryButton } from 'src/components';
 import * as S from './styles';
-
-const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: theme.palette.common.white,
-    color: '#333333',
-    boxShadow: theme.shadows[1],
-  },
-}));
 
 const Header: React.FC = () => {
   const fakeTitle = 'Devchallenges Board';
@@ -47,7 +35,7 @@ const Header: React.FC = () => {
           <S.LogoText>Thullo</S.LogoText>
         </S.LogoContainer>
         <S.TitleContainer>
-          <MainButton
+          <SecondaryButton
             icon={<AppsRoundedIcon sx={{ width: 14 }} />}
             text="All board"
           />
@@ -56,7 +44,7 @@ const Header: React.FC = () => {
       </S.LeftBlock>
       <ClickAwayListener onClickAway={handleTooltipClose}>
         <div>
-          <LightTooltip
+          <S.MainTooltip
             PopperProps={{
               disablePortal: true,
             }}
@@ -93,7 +81,7 @@ const Header: React.FC = () => {
                 </>
               )}
             </S.UserButton>
-          </LightTooltip>
+          </S.MainTooltip>
         </div>
       </ClickAwayListener>
     </S.Header>

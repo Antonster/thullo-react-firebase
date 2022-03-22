@@ -1,4 +1,4 @@
-import { IWaiter } from 'src/interfaces';
+import type { IWaiter } from 'src/interfaces';
 
 import * as S from './styles';
 

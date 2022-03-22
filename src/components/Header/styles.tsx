@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Tooltip from '@mui/material/Tooltip';
 
 export const Header = styled.div`
   position: relative;
@@ -152,4 +153,15 @@ export const TooltipText = styled.div`
   font-size: 16px;
   line-height: 22px;
   letter-spacing: -0.035em;
+`;
+
+export const MainTooltip = styled((props) => (
+  <Tooltip classes={{ popper: props.className }} {...props} />
+))`
+  & .MuiTooltip-tooltip {
+    background-color: #ffffff;
+    color: #333333;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+  }
 `;

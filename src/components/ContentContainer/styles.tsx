@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ContentWrapper = styled.div`
+export const ContentContainer = styled.div`
   width: 100%;
   height: calc(100vh - 70px);
   background: #f8f9fd;

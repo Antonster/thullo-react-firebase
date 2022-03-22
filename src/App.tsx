@@ -5,7 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import 'src/firebase';
 import { authActionCreator } from 'src/store/actions';
-import { Header, ContentWrapper, Waiter } from 'src/components';
+import { Header, ContentContainer, Waiter } from 'src/components';
+import { SignIn } from 'src/routes';
+import {
+  mainRoute,
+  signInRoute,
+  signUpRoute,
+  boardsRoute,
+} from 'src/routesList';
 
 import type { RootState } from 'src/store/store';
 
@@ -26,26 +33,26 @@ const App: React.FC = () => {
   return (
     <>
       <Header />
-      <ContentWrapper>
+      <ContentContainer>
         <Routes>
           {login ? (
             <>
-              <Route path="boards">
+              <Route path={boardsRoute}>
                 <Route index element={<div>boards</div>} />
                 <Route path=":boardId" element={<div>board/123</div>} />
               </Route>
-              <Route path="/" element={<Navigate to="boards" />} />
+              <Route path={mainRoute} element={<Navigate to={boardsRoute} />} />
             </>
           ) : (
             <>
-              <Route path="/" element={<div>main</div>} />
-              <Route path="sign-in" element={<div>sign-in</div>} />
-              <Route path="sign-up" element={<div>sign-up</div>} />
+              <Route path={mainRoute} element={<div>main</div>} />
+              <Route path={signInRoute} element={<SignIn />} />
+              <Route path={signUpRoute} element={<div>sign-up</div>} />
             </>
           )}
           <Route path="*" element={<div>404</div>} />
         </Routes>
-      </ContentWrapper>
+      </ContentContainer>
       {waiter && <Waiter size="30px" />}
     </>
   );
