@@ -13,10 +13,6 @@ export const MainTextField = styled((props) => (
     font-weight: 400;
     letter-spacing: -0.045em;
     color: #bdbdbd;
-
-    &.Mui-error fieldset {
-      box-shadow: 0px 2px 6px rgba(211, 47, 47, 0.1);
-    }
   }
 
   & .MuiInputBase-input {
@@ -27,15 +23,15 @@ export const MainTextField = styled((props) => (
     color: #4f4f4f;
   }
 
+  & .Mui-error .MuiOutlinedInput-notchedOutline {
+    box-shadow: 0px 2px 6px rgba(211, 47, 47, 0.25);
+  }
+
   & fieldset {
     border: none;
     border-radius: 8px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
     transition: all 0.4s;
-  }
-
-  &:hover fieldset {
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
   }
 
   & .MuiFormHelperText-root {

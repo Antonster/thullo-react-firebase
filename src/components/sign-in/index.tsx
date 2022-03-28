@@ -8,7 +8,7 @@ import {
   MainTextField,
   PrimaryButton,
   MainLink,
-} from 'src/components';
+} from 'src/components/common';
 import { signUpRoute } from 'src/routesList';
 import * as S from './styles';
 
@@ -67,9 +67,9 @@ const SignIn: React.FC = () => {
             helperText={touched.password && errors.password}
           />
           <PrimaryButton
+            fullWidth
             color="primary"
             variant="contained"
-            fullWidth
             type="submit"
           >
             Sign In
@@ -77,7 +77,6 @@ const SignIn: React.FC = () => {
         </S.SignInForm>
         <Divider />
         <S.Footer>
-          {/* <S.Separator>or</S.Separator> */}
           <S.LinksContainer>
             <MainLink to="/">{`Can't log in?`}</MainLink>
             <MainLink to={`/${signUpRoute}`}>Sign up for an account</MainLink>

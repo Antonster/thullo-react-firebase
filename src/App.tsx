@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import 'src/firebase';
 import { authActionCreator } from 'src/store/actions';
-import { Header, ContentContainer, Waiter } from 'src/components';
-import { SignIn } from 'src/routes';
+import { SignIn } from 'src/components';
+import { Header, ContentContainer, Waiter } from 'src/components/common';
 import {
   mainRoute,
   signInRoute,

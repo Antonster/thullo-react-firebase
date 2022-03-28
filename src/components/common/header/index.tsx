@@ -9,7 +9,7 @@ import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { thulloImage } from 'src/assets/images';
-import { SecondaryButton } from 'src/components';
+import { SecondaryButton } from 'src/components/common';
 import * as S from './styles';
 
 const Header: React.FC = () => {
