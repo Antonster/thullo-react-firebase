@@ -1,19 +1,8 @@
-import Header from './header';
-import ContentContainer from './content-container';
-import MainLink from './main-link';
-import MainTextField from './main-text-field';
-import MainWrapper from './main-wrapper';
-import PrimaryButton from './primary-button';
-import SecondaryButton from './secondary-button';
-import Waiter from './waiter';
-
-export {
-  Header,
-  ContentContainer,
-  MainLink,
-  MainTextField,
-  MainWrapper,
-  PrimaryButton,
-  SecondaryButton,
-  Waiter,
-};
+export { default as Header } from './header';
+export { default as ContentContainer } from './content-container';
+export { default as MainLink } from './main-link';
+export { default as MainTextField } from './main-text-field';
+export { default as MainWrapper } from './main-wrapper';
+export { default as PrimaryButton } from './primary-button';
+export { default as SecondaryButton } from './secondary-button';
+export { default as Waiter } from './waiter';

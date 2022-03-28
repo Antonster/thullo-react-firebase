@@ -10,8 +10,7 @@ interface UserData {
 
 export const createUser = createAsyncThunk(
   ActionType.CREATE_USER,
-  async (userData: UserData) => {
-    const { email, password } = userData;
+  async ({ email, password }: UserData) => {
     const login = await authAPI.createUser(email, password);
 
     return { login };
@@ -20,8 +19,7 @@ export const createUser = createAsyncThunk(
 
 export const signIn = createAsyncThunk(
   ActionType.SIGN_IN,
-  async (userData: UserData) => {
-    const { email, password } = userData;
+  async ({ email, password }: UserData) => {
     const login = await authAPI.signIn(email, password);
 
     return { login };

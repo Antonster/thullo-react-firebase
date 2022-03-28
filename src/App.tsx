@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import 'src/firebase';
 import { authActionCreator } from 'src/store/actions';
-import { SignIn } from 'src/components';
+import { SignIn, SignUp } from 'src/components';
 import { Header, ContentContainer, Waiter } from 'src/components/common';
 import {
   mainRoute,
@@ -41,13 +41,24 @@ const App: React.FC = () => {
                 <Route index element={<div>boards</div>} />
                 <Route path=":boardId" element={<div>board/123</div>} />
               </Route>
-              <Route path={mainRoute} element={<Navigate to={boardsRoute} />} />
+              <Route
+                path={mainRoute}
+                element={<Navigate to={`/${boardsRoute}`} />}
+              />
+              <Route
+                path={signInRoute}
+                element={<Navigate to={`/${boardsRoute}`} />}
+              />
+              <Route
+                path={signUpRoute}
+                element={<Navigate to={`/${boardsRoute}`} />}
+              />
             </>
           ) : (
             <>
               <Route path={mainRoute} element={<div>main</div>} />
               <Route path={signInRoute} element={<SignIn />} />
-              <Route path={signUpRoute} element={<div>sign-up</div>} />
+              <Route path={signUpRoute} element={<SignUp />} />
             </>
           )}
           <Route path="*" element={<div>404</div>} />

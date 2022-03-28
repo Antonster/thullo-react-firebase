@@ -10,7 +10,7 @@ import {
   PrimaryButton,
   MainLink,
 } from 'src/components/common';
-import { signUpRoute } from 'src/routesList';
+import { signInRoute } from 'src/routesList';
 import { authActionCreator } from 'src/store/actions';
 import * as S from './styles';
 
@@ -23,19 +23,23 @@ const validationSchema = yup.object({
     .string()
     .min(8, 'Password should be of minimum 8 characters length')
     .required('Password is required'),
+  passwordConfirmation: yup
+    .string()
+    .oneOf([yup.ref('password'), null], 'Passwords must match'),
 });
 
-const SignIn: React.FC = () => {
+const SignUp: React.FC = () => {
   const dispatch = useDispatch();
   const { handleSubmit, handleChange, values, touched, errors } = useFormik({
     initialValues: {
       email: '',
       password: '',
+      passwordConfirmation: '',
     },
     validationSchema,
     onSubmit: (value) => {
       dispatch(
-        authActionCreator.signIn({
+        authActionCreator.createUser({
           email: value.email,
           password: value.password,
         }),
@@ -45,13 +49,13 @@ const SignIn: React.FC = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
-    <S.SignIn>
+    <S.SignUp>
       <MainWrapper
         width={isMobile ? '100%' : '500px'}
         height={isMobile ? '100%' : undefined}
         padding="36px"
       >
-        <S.SignInForm onSubmit={handleSubmit}>
+        <S.SignUpForm onSubmit={handleSubmit}>
           <S.Title>Login to Thullo</S.Title>
           <MainTextField
             fullWidth
@@ -74,25 +78,39 @@ const SignIn: React.FC = () => {
             error={touched.password && !!errors.password}
             helperText={touched.password && errors.password}
           />
+          <MainTextField
+            fullWidth
+            id="passwordConfirmation"
+            name="passwordConfirmation"
+            label="Confirm your password"
+            type="password"
+            value={values.passwordConfirmation}
+            onChange={handleChange}
+            error={
+              touched.passwordConfirmation && !!errors.passwordConfirmation
+            }
+            helperText={
+              touched.passwordConfirmation && errors.passwordConfirmation
+            }
+          />
           <PrimaryButton
             fullWidth
             color="primary"
             variant="contained"
             type="submit"
           >
-            Sign In
+            Sign Up
           </PrimaryButton>
-        </S.SignInForm>
+        </S.SignUpForm>
         <Divider />
         <S.Footer>
           <S.LinksContainer>
-            <MainLink to="/">{`Can't log in?`}</MainLink>
-            <MainLink to={`/${signUpRoute}`}>Sign up for an account</MainLink>
+            <MainLink to={`/${signInRoute}`}>Sign in for an account</MainLink>
           </S.LinksContainer>
         </S.Footer>
       </MainWrapper>
-    </S.SignIn>
+    </S.SignUp>
   );
 };
 
-export default SignIn;
+export default SignUp;
