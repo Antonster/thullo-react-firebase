@@ -12,5 +12,10 @@ export const PrimaryButton = styled((props) => (
     line-height: 20px;
     letter-spacing: -0.035em;
     padding: 8px 16px;
+    background-color: #1aa3de;
+
+    &:hover {
+      background-color: rgba(26, 163, 222, 0.8);
+    }
   }
 `;

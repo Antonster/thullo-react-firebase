@@ -32,3 +32,8 @@ export interface IStyledMainWrapper {
 export interface IPrimaryButton {
   text: string;
 }
+
+export interface UserData {
+  email: string;
+  password: string;
+}

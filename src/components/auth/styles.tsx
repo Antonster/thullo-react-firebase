@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SignUp = styled.div`
+export const Auth = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
@@ -8,7 +8,7 @@ export const SignUp = styled.div`
   justify-content: center;
 `;
 
-export const SignUpForm = styled.form`
+export const AuthForm = styled.form`
   margin: 0 0 24px;
 `;
 

@@ -1,34 +1,15 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import 'src/firebase';
-import { authActionCreator } from 'src/store/actions';
-import { SignIn, SignUp } from 'src/components';
+import { Auth } from 'src/components';
+import { SignIn, SignUp, ResetPassword } from 'src/components/auth/components';
 import { Header, ContentContainer, Waiter } from 'src/components/common';
-import {
-  mainRoute,
-  signInRoute,
-  signUpRoute,
-  boardsRoute,
-} from 'src/routesList';
 
 import type { RootState } from 'src/store/store';
 
 const App: React.FC = () => {
-  const { login } = useSelector((root: RootState) => root.auth);
-  const dispatch = useDispatch();
-  const [waiter, setWaiter] = useState(false);
-
-  // useEffect(() => {
-  //   dispatch(
-  //     authActionCreator.signIn({
-  //       email: 'test1@gmail.com',
-  //       password: '123456',
-  //     }),
-  //   );
-  // }, [dispatch]);
+  const { login, waiter } = useSelector((root: RootState) => root.auth);
 
   return (
     <>
@@ -37,28 +18,23 @@ const App: React.FC = () => {
         <Routes>
           {login ? (
             <>
-              <Route path={boardsRoute}>
+              <Route index element={<Navigate to="/boards" />} />
+              <Route path="auth" element={<Navigate to="/boards" />} />
+              <Route path="auth/new-user" element={<Navigate to="/boards" />} />
+              <Route path="auth/reset-password" element={<Navigate to="/boards" />} />
+              <Route path="boards">
                 <Route index element={<div>boards</div>} />
                 <Route path=":boardId" element={<div>board/123</div>} />
               </Route>
-              <Route
-                path={mainRoute}
-                element={<Navigate to={`/${boardsRoute}`} />}
-              />
-              <Route
-                path={signInRoute}
-                element={<Navigate to={`/${boardsRoute}`} />}
-              />
-              <Route
-                path={signUpRoute}
-                element={<Navigate to={`/${boardsRoute}`} />}
-              />
             </>
           ) : (
             <>
-              <Route path={mainRoute} element={<div>main</div>} />
-              <Route path={signInRoute} element={<SignIn />} />
-              <Route path={signUpRoute} element={<SignUp />} />
+              <Route index element={<div>main</div>} />
+              <Route path="auth" element={<Auth />}>
+                <Route index element={<SignIn />} />
+                <Route path="new-user" element={<SignUp />} />
+                <Route path="reset-password" element={<ResetPassword />} />
+              </Route>
             </>
           )}
           <Route path="*" element={<div>404</div>} />

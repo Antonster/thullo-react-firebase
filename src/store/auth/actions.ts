@@ -1,12 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import * as authAPI from 'src/api/auth';
+import { UserData } from 'src/interfaces';
 import { ActionType } from './common';
-
-interface UserData {
-  email: string;
-  password: string;
-}
 
 export const createUser = createAsyncThunk(
   ActionType.CREATE_USER,
@@ -30,4 +26,8 @@ export const signOut = createAsyncThunk(ActionType.SIGN_OUT, async () => {
   const login = await authAPI.signOut();
 
   return { login };
+});
+
+export const resetPassword = createAsyncThunk(ActionType.RESET_PASSWORD, async (email: string) => {
+  await authAPI.resetPassword(email);
 });
