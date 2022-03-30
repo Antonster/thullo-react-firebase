@@ -6,3 +6,4 @@ export { default as MainWrapper } from './main-wrapper';
 export { default as PrimaryButton } from './primary-button';
 export { default as SecondaryButton } from './secondary-button';
 export { default as Waiter } from './waiter';
+export { default as ErrorMessage } from './error-message';

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import 'src/firebase';
 import { Auth } from 'src/components';
-import { SignIn, SignUp, ResetPassword } from 'src/components/auth/components';
+import { SignIn, SignUp, ForgotPassword, ResetPassword } from 'src/components/auth/components';
 import { Header, ContentContainer, Waiter } from 'src/components/common';
 
 import type { RootState } from 'src/store/store';
@@ -20,8 +20,6 @@ const App: React.FC = () => {
             <>
               <Route index element={<Navigate to="/boards" />} />
               <Route path="auth" element={<Navigate to="/boards" />} />
-              <Route path="auth/new-user" element={<Navigate to="/boards" />} />
-              <Route path="auth/reset-password" element={<Navigate to="/boards" />} />
               <Route path="boards">
                 <Route index element={<div>boards</div>} />
                 <Route path=":boardId" element={<div>board/123</div>} />
@@ -33,6 +31,7 @@ const App: React.FC = () => {
               <Route path="auth" element={<Auth />}>
                 <Route index element={<SignIn />} />
                 <Route path="new-user" element={<SignUp />} />
+                <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="reset-password" element={<ResetPassword />} />
               </Route>
             </>

@@ -53,3 +53,15 @@ export const LinksContainer = styled.div`
     flex-direction: column;
   }
 `;
+
+export const Sent = styled.div`
+  width: 100%;
+  margin: 0 0 24px;
+  text-align: center;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  letter-spacing: -0.035em;
+  color: #333333;
+`;

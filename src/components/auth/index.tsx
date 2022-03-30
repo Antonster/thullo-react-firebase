@@ -22,14 +22,16 @@ const Auth: React.FC = () => {
           <S.LinksContainer>
             {pathname === '/auth' && (
               <>
-                <MainLink to="/auth/reset-password">{`Can't login?`}</MainLink>
+                <MainLink to="/auth/forgot-password">{`Can't login?`}</MainLink>
                 <MainLink to="/auth/new-user">Sign up for an account</MainLink>
               </>
             )}
             {pathname === '/auth/new-user' && (
               <MainLink to="/auth">Do you already have an account? Sign in</MainLink>
             )}
-            {pathname === '/auth/reset-password' && <MainLink to="/auth">Back to sign in</MainLink>}
+            {(pathname === '/auth/forgot-password' || pathname === '/auth/reset-password') && (
+              <MainLink to="/auth">Back to sign in</MainLink>
+            )}
           </S.LinksContainer>
         </S.Footer>
       </MainWrapper>

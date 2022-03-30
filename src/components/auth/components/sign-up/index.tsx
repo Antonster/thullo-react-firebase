@@ -1,10 +1,23 @@
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-import { MainTextField, PrimaryButton } from 'src/components/common';
+import { MainTextField, PrimaryButton, ErrorMessage } from 'src/components/common';
 import { authActionCreator } from 'src/store/actions';
+import type { RootState } from 'src/store/store';
 import * as S from '../../styles';
+
+export interface ISignUpStatusMessages {
+  [key: string]: string;
+}
+
+const statusMessages: ISignUpStatusMessages = {
+  'auth/email-already-in-use': 'Email already in use',
+  'auth/invalid-email': 'Invalid email',
+  'auth/operation-not-allowed': 'Operation not allowed',
+  'auth/weak-password': 'Weak password',
+};
 
 const validationSchema = yup.object({
   email: yup.string().email('Enter a valid email').required('Email is required'),
@@ -12,11 +25,15 @@ const validationSchema = yup.object({
     .string()
     .min(8, 'Password should be of minimum 8 characters length')
     .required('Password is required'),
-  passwordConfirmation: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match'),
+  passwordConfirmation: yup
+    .string()
+    .oneOf([yup.ref('password'), null], 'Passwords must match')
+    .required('Password confirmation is required'),
 });
 
 const SignUp: React.FC = () => {
   const dispatch = useDispatch();
+  const { createUserStatus } = useSelector((state: RootState) => state.auth);
   const { handleSubmit, handleChange, values, touched, errors } = useFormik({
     initialValues: {
       email: '',
@@ -33,6 +50,12 @@ const SignUp: React.FC = () => {
       );
     },
   });
+
+  useEffect(() => {
+    return () => {
+      dispatch(authActionCreator.clearStatuses());
+    };
+  }, [dispatch]);
 
   return (
     <S.AuthForm onSubmit={handleSubmit}>
@@ -69,7 +92,8 @@ const SignUp: React.FC = () => {
         error={touched.passwordConfirmation && !!errors.passwordConfirmation}
         helperText={touched.passwordConfirmation && errors.passwordConfirmation}
       />
-      <PrimaryButton fullWidth color="primary" variant="contained" type="submit">
+      {createUserStatus && <ErrorMessage>{statusMessages[createUserStatus]}</ErrorMessage>}
+      <PrimaryButton fullWidth type="submit">
         Sign Up
       </PrimaryButton>
     </S.AuthForm>

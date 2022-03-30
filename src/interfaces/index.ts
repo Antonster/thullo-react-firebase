@@ -33,7 +33,23 @@ export interface IPrimaryButton {
   text: string;
 }
 
-export interface UserData {
+export interface IUserData {
   email: string;
   password: string;
+}
+
+export interface IResetPassword {
+  actionCode: string;
+  newPassword: string;
+}
+
+export interface IAuthReducer {
+  login: boolean;
+  createUserStatus: string | undefined;
+  signInStatus: string | undefined;
+  signOutStatus: string | undefined;
+  sendPasswordResetEmailStatus: string | undefined;
+  verifyCodeStatus: string | undefined;
+  resetPasswordStatus: string | undefined;
+  waiter: boolean;
 }
