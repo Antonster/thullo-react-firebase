@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
-import type {
-  IStyledWaiterSquare,
-  IStyledWaiterSquarePart,
-} from 'src/interfaces';
+import type { IStyledWaiterSquare, IStyledWaiterSquarePart } from 'src/interfaces';
 
 export const Waiter = styled.div`
   position: absolute;

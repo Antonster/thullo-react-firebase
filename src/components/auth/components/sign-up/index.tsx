@@ -3,21 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-import { MainTextField, PrimaryButton, ErrorMessage } from 'src/components/common';
+import { MainTextField, PrimaryButton } from 'src/components/common';
 import { authActionCreator } from 'src/store/actions';
 import type { RootState } from 'src/store/store';
+import { signUpStatusMessages } from 'src/constants';
 import * as S from '../../styles';
-
-export interface ISignUpStatusMessages {
-  [key: string]: string;
-}
-
-const statusMessages: ISignUpStatusMessages = {
-  'auth/email-already-in-use': 'Email already in use',
-  'auth/invalid-email': 'Invalid email',
-  'auth/operation-not-allowed': 'Operation not allowed',
-  'auth/weak-password': 'Weak password',
-};
 
 const validationSchema = yup.object({
   email: yup.string().email('Enter a valid email').required('Email is required'),
@@ -92,7 +82,9 @@ const SignUp: React.FC = () => {
         error={touched.passwordConfirmation && !!errors.passwordConfirmation}
         helperText={touched.passwordConfirmation && errors.passwordConfirmation}
       />
-      {createUserStatus && <ErrorMessage>{statusMessages[createUserStatus]}</ErrorMessage>}
+      {createUserStatus && (
+        <S.Message $color="error">{signUpStatusMessages[createUserStatus]}</S.Message>
+      )}
       <PrimaryButton fullWidth type="submit">
         Sign Up
       </PrimaryButton>

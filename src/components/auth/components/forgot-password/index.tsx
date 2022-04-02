@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { MainTextField, PrimaryButton } from 'src/components/common';
 import { authActionCreator } from 'src/store/actions';
 import type { RootState } from 'src/store/store';
+import { forgotPasswordStatusMessages } from 'src/constants';
 import * as S from '../../styles';
 
 const validationSchema = yup.object({
@@ -52,8 +53,13 @@ const ForgotPassword: React.FC = () => {
           </PrimaryButton>
         </S.AuthForm>
       )}
+      {sendPasswordResetEmailStatus && sendPasswordResetEmailStatus !== 'sent' && (
+        <S.Message $color="error">
+          {forgotPasswordStatusMessages[sendPasswordResetEmailStatus]}
+        </S.Message>
+      )}
       {sendPasswordResetEmailStatus === 'sent' && (
-        <S.Sent>Recovery email has been sent to your email</S.Sent>
+        <S.Message $color="success">Recovery email has been sent to your email address</S.Message>
       )}
     </>
   );

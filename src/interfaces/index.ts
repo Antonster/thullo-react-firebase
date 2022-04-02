@@ -5,22 +5,12 @@ export interface ISecondaryButton {
   text: string;
 }
 
-export interface IWaiter {
-  size?: string;
-}
-
 export interface IStyledWaiterSquare {
   $size?: string;
 }
 
 export interface IStyledWaiterSquarePart {
   $part?: 'first' | 'second' | 'third' | 'fourth';
-}
-
-export interface IMainWrapper {
-  width?: string;
-  height?: string;
-  padding?: string;
 }
 
 export interface IStyledMainWrapper {
@@ -49,7 +39,14 @@ export interface IAuthReducer {
   signInStatus: string | undefined;
   signOutStatus: string | undefined;
   sendPasswordResetEmailStatus: string | undefined;
-  verifyCodeStatus: string | undefined;
   resetPasswordStatus: string | undefined;
   waiter: boolean;
+}
+
+export interface IStatusMessages {
+  [key: string]: string;
+}
+
+export interface IStyledMessage {
+  $color?: 'error' | 'success' | string;
 }

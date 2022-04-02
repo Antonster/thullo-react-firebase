@@ -1,11 +1,11 @@
-import type { IWaiter } from 'src/interfaces';
+import type { IStyledWaiterSquare } from 'src/interfaces';
 
 import * as S from './styles';
 
-const Waiter: React.FC<IWaiter> = ({ size }) => {
+const Waiter: React.FC<IStyledWaiterSquare> = ({ $size }) => {
   return (
     <S.Waiter>
-      <S.Square $size={size}>
+      <S.Square $size={$size}>
         <S.SquarePart $part="first" />
         <S.SquarePart $part="second" />
         <S.SquarePart $part="third" />

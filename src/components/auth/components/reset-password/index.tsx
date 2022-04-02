@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
 import { MainTextField, PrimaryButton } from 'src/components/common';
 import { authActionCreator } from 'src/store/actions';
+import type { RootState } from 'src/store/store';
+import { resetPasswordStatusMessages } from 'src/constants';
 import * as S from '../../styles';
 
 const validationSchema = yup.object({
@@ -21,6 +23,7 @@ const validationSchema = yup.object({
 
 const ResetPassword: React.FC = () => {
   const dispatch = useDispatch();
+  const { resetPasswordStatus } = useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { handleSubmit, handleChange, values, touched, errors } = useFormik({
@@ -30,6 +33,7 @@ const ResetPassword: React.FC = () => {
     },
     validationSchema,
     onSubmit: (value) => {
+      dispatch(authActionCreator.clearStatuses());
       dispatch(
         authActionCreator.resetPassword({
           actionCode: searchParams.get('oobCode') || '',
@@ -40,7 +44,14 @@ const ResetPassword: React.FC = () => {
   });
 
   useEffect(() => {
+    return () => {
+      dispatch(authActionCreator.clearStatuses());
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
     if (searchParams.get('oobCode')) {
+      dispatch(authActionCreator.clearStatuses());
       dispatch(authActionCreator.verifyCode(searchParams.get('oobCode') || ''));
     } else {
       navigate('/auth');
@@ -49,32 +60,44 @@ const ResetPassword: React.FC = () => {
 
   return (
     <S.AuthForm onSubmit={handleSubmit}>
-      <S.Title>Enter new password</S.Title>
-      <MainTextField
-        fullWidth
-        id="password"
-        name="password"
-        label="Enter your password"
-        type="password"
-        value={values.password}
-        onChange={handleChange}
-        error={touched.password && !!errors.password}
-        helperText={touched.password && errors.password}
-      />
-      <MainTextField
-        fullWidth
-        id="passwordConfirmation"
-        name="passwordConfirmation"
-        label="Confirm your password"
-        type="password"
-        value={values.passwordConfirmation}
-        onChange={handleChange}
-        error={touched.passwordConfirmation && !!errors.passwordConfirmation}
-        helperText={touched.passwordConfirmation && errors.passwordConfirmation}
-      />
-      <PrimaryButton fullWidth type="submit">
-        Change password
-      </PrimaryButton>
+      {resetPasswordStatus !== 'changed' && (
+        <>
+          <S.Title>Enter new password</S.Title>
+          <MainTextField
+            fullWidth
+            id="password"
+            name="password"
+            label="Enter your password"
+            type="password"
+            value={values.password}
+            onChange={handleChange}
+            error={touched.password && !!errors.password}
+            helperText={touched.password && errors.password}
+          />
+          <MainTextField
+            fullWidth
+            id="passwordConfirmation"
+            name="passwordConfirmation"
+            label="Confirm your password"
+            type="password"
+            value={values.passwordConfirmation}
+            onChange={handleChange}
+            error={touched.passwordConfirmation && !!errors.passwordConfirmation}
+            helperText={touched.passwordConfirmation && errors.passwordConfirmation}
+          />
+        </>
+      )}
+      {resetPasswordStatus && resetPasswordStatus !== 'changed' && (
+        <S.Message $color="error">{resetPasswordStatusMessages[resetPasswordStatus]}</S.Message>
+      )}
+      {resetPasswordStatus === 'changed' && (
+        <S.Message $color="success">Password has been changed</S.Message>
+      )}
+      {resetPasswordStatus !== 'changed' && (
+        <PrimaryButton fullWidth type="submit">
+          Change password
+        </PrimaryButton>
+      )}
     </S.AuthForm>
   );
 };

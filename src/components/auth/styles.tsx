@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import type { IStyledMessage } from 'src/interfaces';
+
 export const Auth = styled.div`
   width: 100%;
   height: 100%;
@@ -54,14 +56,25 @@ export const LinksContainer = styled.div`
   }
 `;
 
-export const Sent = styled.div`
-  width: 100%;
-  margin: 0 0 24px;
-  text-align: center;
+export const Message = styled.div<IStyledMessage>`
   font-family: 'Poppins';
   font-weight: 500;
   font-size: 18px;
-  line-height: 27px;
+  line-height: 24px;
+  text-align: center;
   letter-spacing: -0.035em;
-  color: #333333;
+  color: ${({ $color }) =>
+    $color
+      ? () => {
+          switch ($color) {
+            case 'error':
+              return '#e96067';
+            case 'success':
+              return '#219653';
+            default:
+              return $color;
+          }
+        }
+      : '#333333'};
+  margin: 0 0 24px;
 `;

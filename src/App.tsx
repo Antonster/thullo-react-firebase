@@ -39,7 +39,7 @@ const App: React.FC = () => {
           <Route path="*" element={<div>404</div>} />
         </Routes>
       </ContentContainer>
-      {waiter && <Waiter size="30px" />}
+      {waiter && <Waiter $size="30px" />}
     </>
   );
 };

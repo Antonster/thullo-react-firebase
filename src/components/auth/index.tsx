@@ -12,9 +12,9 @@ const Auth: React.FC = () => {
   return (
     <S.Auth>
       <MainWrapper
-        width={isMobile ? '100%' : '500px'}
-        height={isMobile ? '100%' : undefined}
-        padding="36px"
+        $width={isMobile ? '100%' : '500px'}
+        $height={isMobile ? '100%' : undefined}
+        $padding="36px"
       >
         <Outlet />
         <Divider />

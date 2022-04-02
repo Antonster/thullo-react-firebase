@@ -18,7 +18,6 @@ const initialState: IAuthReducer = {
   signInStatus: undefined,
   signOutStatus: undefined,
   sendPasswordResetEmailStatus: undefined,
-  verifyCodeStatus: undefined,
   resetPasswordStatus: undefined,
   waiter: false,
 };
@@ -85,7 +84,7 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(verifyCode.rejected, (state, action) => {
       state.waiter = false;
-      state.verifyCodeStatus = action.error.code;
+      state.resetPasswordStatus = action.error.code;
     })
 
     .addCase(resetPassword.pending, (state) => {
@@ -93,6 +92,7 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(resetPassword.fulfilled, (state) => {
       state.waiter = false;
+      state.resetPasswordStatus = 'changed';
     })
     .addCase(resetPassword.rejected, (state, action) => {
       state.waiter = false;
@@ -104,7 +104,6 @@ const reducer = createReducer(initialState, (builder) => {
       state.signInStatus = undefined;
       state.signOutStatus = undefined;
       state.sendPasswordResetEmailStatus = undefined;
-      state.verifyCodeStatus = undefined;
       state.resetPasswordStatus = undefined;
     });
 });

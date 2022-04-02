@@ -1,10 +1,10 @@
-import type { IMainWrapper } from 'src/interfaces';
+import type { IStyledMainWrapper } from 'src/interfaces';
 
 import * as S from './styles';
 
-const MainWrapper: React.FC<IMainWrapper> = ({ children, width, height, padding }) => {
+const MainWrapper: React.FC<IStyledMainWrapper> = ({ children, $width, $height, $padding }) => {
   return (
-    <S.MainWrapper $width={width} $height={height} $padding={padding}>
+    <S.MainWrapper $width={$width} $height={$height} $padding={$padding}>
       {children}
     </S.MainWrapper>
   );
