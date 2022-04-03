@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from 'src/hooks';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
 import { MainTextField, PrimaryButton } from 'src/components/common';
 import { authActionCreator } from 'src/store/actions';
-import type { RootState } from 'src/store/store';
 import { resetPasswordStatusMessages } from 'src/constants';
 import * as S from '../../styles';
 
@@ -22,8 +21,8 @@ const validationSchema = yup.object({
 });
 
 const ResetPassword: React.FC = () => {
-  const dispatch = useDispatch();
-  const { resetPasswordStatus } = useSelector((state: RootState) => state.auth);
+  const dispatch = useAppDispatch();
+  const { resetPasswordStatus } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { handleSubmit, handleChange, values, touched, errors } = useFormik({

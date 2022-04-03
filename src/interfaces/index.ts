@@ -34,13 +34,14 @@ export interface IResetPassword {
 }
 
 export interface IAuthReducer {
-  login: boolean;
+  login: string | undefined;
   createUserStatus: string | undefined;
   signInStatus: string | undefined;
   signOutStatus: string | undefined;
   sendPasswordResetEmailStatus: string | undefined;
   resetPasswordStatus: string | undefined;
   waiter: boolean;
+  initialLoading: boolean;
 }
 
 export interface IStatusMessages {

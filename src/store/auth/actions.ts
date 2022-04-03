@@ -4,6 +4,10 @@ import * as authAPI from 'src/api/auth';
 import { IUserData, IResetPassword } from 'src/interfaces';
 import { ActionType } from './common';
 
+export const setUser = createAction(ActionType.GET_USER, (uid: string | undefined) => {
+  return { payload: { uid } };
+});
+
 export const createUser = createAsyncThunk(
   ActionType.CREATE_USER,
   async ({ email, password }: IUserData) => {
@@ -23,9 +27,7 @@ export const signIn = createAsyncThunk(
 );
 
 export const signOut = createAsyncThunk(ActionType.SIGN_OUT, async () => {
-  const result = await authAPI.signOut();
-
-  return { result };
+  await authAPI.signOut();
 });
 
 export const sendPasswordResetEmail = createAsyncThunk(

@@ -9,14 +9,20 @@ import {
 
 import { firebaseAuth } from 'src/firebase';
 
-export const createUser = async (email: string, password: string): Promise<boolean> => {
-  const result = await createUserWithEmailAndPassword(firebaseAuth, email, password);
-  return !!result;
+export const createUser = async (email: string, password: string): Promise<string> => {
+  const {
+    user: { uid },
+  } = await createUserWithEmailAndPassword(firebaseAuth, email, password);
+
+  return uid;
 };
 
-export const signIn = async (email: string, password: string): Promise<boolean> => {
-  const result = await signInWithEmailAndPassword(firebaseAuth, email, password);
-  return !!result;
+export const signIn = async (email: string, password: string): Promise<string> => {
+  const {
+    user: { uid },
+  } = await signInWithEmailAndPassword(firebaseAuth, email, password);
+
+  return uid;
 };
 
 export const signOut = async (): Promise<void> => {

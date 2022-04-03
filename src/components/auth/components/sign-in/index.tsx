@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from 'src/hooks';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
 import { MainTextField, PrimaryButton } from 'src/components/common';
 import { authActionCreator } from 'src/store/actions';
-import type { RootState } from 'src/store/store';
 import { signInStatusMessages } from 'src/constants';
 import * as S from '../../styles';
 
@@ -18,8 +17,8 @@ const validationSchema = yup.object({
 });
 
 const SignIn: React.FC = () => {
-  const dispatch = useDispatch();
-  const { signInStatus } = useSelector((state: RootState) => state.auth);
+  const dispatch = useAppDispatch();
+  const { signInStatus } = useAppSelector((state) => state.auth);
   const { handleSubmit, handleChange, values, touched, errors } = useFormik({
     initialValues: {
       email: '',

@@ -3,6 +3,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import type { IAuthReducer } from 'src/interfaces';
 
 import {
+  setUser,
   createUser,
   signIn,
   signOut,
@@ -13,17 +14,26 @@ import {
 } from './actions';
 
 const initialState: IAuthReducer = {
-  login: false,
+  login: undefined,
   createUserStatus: undefined,
   signInStatus: undefined,
   signOutStatus: undefined,
   sendPasswordResetEmailStatus: undefined,
   resetPasswordStatus: undefined,
-  waiter: false,
+  waiter: true,
+  initialLoading: true,
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
+    .addCase(setUser, (state, action) => {
+      const { uid } = action.payload;
+
+      state.login = uid;
+      state.waiter = false;
+      state.initialLoading = false;
+    })
+
     .addCase(createUser.pending, (state) => {
       state.waiter = true;
     })
@@ -56,7 +66,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.waiter = true;
     })
     .addCase(signOut.fulfilled, (state) => {
-      state.login = false;
+      state.login = undefined;
       state.waiter = false;
     })
     .addCase(signOut.rejected, (state, action) => {

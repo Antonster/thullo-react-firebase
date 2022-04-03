@@ -1,4 +1,5 @@
 const ActionType = {
+  GET_USER: 'auth/get-user',
   CREATE_USER: 'auth/create-user',
   SIGN_IN: 'auth/sign-in',
   SIGN_OUT: 'auth/sign-out',
