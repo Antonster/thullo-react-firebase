@@ -33,10 +33,7 @@ const App: React.FC = () => {
             {login ? (
               <>
                 <Route index element={<Navigate to="/boards" />} />
-                <Route path="auth" element={<Navigate to="/boards" />} />
-                <Route path="auth/new-user" element={<Navigate to="/boards" />} />
-                <Route path="auth/forgot-password" element={<Navigate to="/boards" />} />
-                <Route path="auth/reset-password" element={<Navigate to="/boards" />} />
+                <Route path="auth/*" element={<Navigate to="/boards" />} />
                 <Route path="boards">
                   <Route index element={<div>boards</div>} />
                   <Route path=":boardId" element={<div>board/123</div>} />
