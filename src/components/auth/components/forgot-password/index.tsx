@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from 'src/hooks';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-import { MainTextField, PrimaryButton } from 'src/components/common';
+import { MainTextField, MainButton } from 'src/components/common';
 import { authActionCreator } from 'src/store/actions';
 import { forgotPasswordStatusMessages } from 'src/constants';
 import * as S from '../../styles';
@@ -47,9 +47,13 @@ const ForgotPassword: React.FC = () => {
             error={touched.email && !!errors.email}
             helperText={touched.email && errors.email}
           />
-          <PrimaryButton fullWidth type="submit">
-            Send reset link
-          </PrimaryButton>
+          <MainButton
+            $fullWidth
+            $size="big"
+            $style="primary"
+            type="submit"
+            text="Send reset link"
+          />
         </S.AuthForm>
       )}
       {sendPasswordResetEmailStatus && sendPasswordResetEmailStatus !== 'sent' && (

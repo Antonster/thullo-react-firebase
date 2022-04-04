@@ -1,8 +1,21 @@
 import type { ReactElement } from 'react';
 
-export interface ISecondaryButton {
-  icon: ReactElement;
+export interface IMainButton {
+  icon?: ReactElement;
   text: string;
+  type: 'button' | 'submit' | 'reset';
+  $style: 'primary' | 'secondary';
+  $size?: 'big' | 'small';
+  $fullWidth?: boolean;
+}
+
+export interface IStyledMainButton {
+  $style: 'primary' | 'secondary';
+  $fullWidth?: boolean;
+}
+
+export interface IStyledMainButtonText {
+  $size?: 'big' | 'small';
 }
 
 export interface IStyledWaiterSquare {
@@ -17,10 +30,6 @@ export interface IStyledMainWrapper {
   $width?: string;
   $height?: string;
   $padding?: string;
-}
-
-export interface IPrimaryButton {
-  text: string;
 }
 
 export interface IUserData {
@@ -50,4 +59,10 @@ export interface IStatusMessages {
 
 export interface IStyledMessage {
   $color?: 'error' | 'success' | string;
+}
+
+export interface IBoardsCard {
+  image?: string;
+  title: string;
+  description?: string;
 }

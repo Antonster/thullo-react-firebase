@@ -10,7 +10,7 @@ import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { thulloImage } from 'src/assets/images';
-import { SecondaryButton } from 'src/components/common';
+import { MainButton } from 'src/components/common';
 import { useAppDispatch, useAppSelector } from 'src/hooks';
 import { authActionCreator } from 'src/store/actions';
 import * as S from './styles';
@@ -46,7 +46,13 @@ const Header: React.FC = () => {
           <S.LogoText>Thullo</S.LogoText>
         </S.LogoContainer>
         <S.TitleContainer>
-          <SecondaryButton icon={<AppsRoundedIcon sx={{ width: 14 }} />} text="All board" />
+          <MainButton
+            type="button"
+            $size="small"
+            $style="secondary"
+            icon={<AppsRoundedIcon sx={{ width: 14 }} />}
+            text="All board"
+          />
           <S.BoardTitle>{fakeTitle}</S.BoardTitle>
         </S.TitleContainer>
       </S.LeftBlock>

@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from 'src/hooks';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-import { MainTextField, PrimaryButton } from 'src/components/common';
+import { MainTextField, MainButton } from 'src/components/common';
 import { authActionCreator } from 'src/store/actions';
 import { signInStatusMessages } from 'src/constants';
 import * as S from '../../styles';
@@ -67,9 +67,7 @@ const SignIn: React.FC = () => {
         helperText={touched.password && errors.password}
       />
       {signInStatus && <S.Message $color="error">{signInStatusMessages[signInStatus]}</S.Message>}
-      <PrimaryButton fullWidth type="submit">
-        Sign In
-      </PrimaryButton>
+      <MainButton $fullWidth $size="big" $style="primary" type="submit" text="Sign In" />
     </S.AuthForm>
   );
 };

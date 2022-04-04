@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from 'src/hooks';
 import { onAuthStateChanged } from 'firebase/auth';
 import { firebaseAuth } from 'src/firebase';
 
-import { Auth } from 'src/components';
+import { Auth, Boards } from 'src/components';
 import { SignIn, SignUp, ForgotPassword, ResetPassword } from 'src/components/auth/components';
 import { Header, ContentContainer, Waiter } from 'src/components/common';
 import { authActionCreator } from 'src/store/actions';
@@ -35,13 +35,14 @@ const App: React.FC = () => {
                 <Route index element={<Navigate to="/boards" />} />
                 <Route path="auth/*" element={<Navigate to="/boards" />} />
                 <Route path="boards">
-                  <Route index element={<div>boards</div>} />
+                  <Route index element={<Boards />} />
                   <Route path=":boardId" element={<div>board/123</div>} />
                 </Route>
               </>
             ) : (
               <>
                 <Route index element={<div>main</div>} />
+                <Route path="boards/*" element={<Navigate to="/" />} />
                 <Route path="auth" element={<Auth />}>
                   <Route index element={<SignIn />} />
                   <Route path="new-user" element={<SignUp />} />

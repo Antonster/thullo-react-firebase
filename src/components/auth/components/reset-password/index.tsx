@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from 'src/hooks';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-import { MainTextField, PrimaryButton } from 'src/components/common';
+import { MainTextField, MainButton } from 'src/components/common';
 import { authActionCreator } from 'src/store/actions';
 import { resetPasswordStatusMessages } from 'src/constants';
 import * as S from '../../styles';
@@ -93,9 +93,7 @@ const ResetPassword: React.FC = () => {
         <S.Message $color="success">Password has been changed</S.Message>
       )}
       {resetPasswordStatus !== 'changed' && (
-        <PrimaryButton fullWidth type="submit">
-          Change password
-        </PrimaryButton>
+        <MainButton $fullWidth $size="big" $style="primary" type="submit" text="Change password" />
       )}
     </S.AuthForm>
   );
