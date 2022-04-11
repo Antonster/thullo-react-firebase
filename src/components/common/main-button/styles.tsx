@@ -3,6 +3,7 @@ import { IStyledMainButton, IStyledMainButtonText } from 'src/interfaces';
 
 export const MainButton = styled.button<IStyledMainButton>`
   ${({ $fullWidth }) => ($fullWidth ? 'width: 100%;' : '')}
+  ${({ $gap }) => ($gap ? `margin-right: ${$gap};` : '')}
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,6 +23,10 @@ export const MainButton = styled.button<IStyledMainButton>`
         return `
           color: #828282;
           background: #f2f2f2;
+        `;
+      case 'empty':
+        return `
+          color: #828282;
         `;
       default:
         return '';
@@ -44,6 +49,10 @@ export const MainButton = styled.button<IStyledMainButton>`
             color: #ffffff;
             background: #1aa3de;
           `;
+        case 'empty':
+          return `
+            color: #1aa3de;
+        `;
         default:
           return '';
       }

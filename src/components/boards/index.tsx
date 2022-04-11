@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import { testImage1, testImage2, testImage3, testImage4 } from 'src/assets/images';
-import { Header, Card } from './components';
+import { Header, Card, BoardCreationForm } from './components';
 
 import * as S from './styles';
 
@@ -29,11 +31,26 @@ const fakeCards = [
 ];
 
 const Boards: React.FC = () => {
+  const [modal, setModal] = useState(false);
+  const [boardList, setBoardList] = useState(fakeCards);
+
+  const onCloseModal = (): void => {
+    setModal(false);
+  };
+
+  const onOpenModal = (): void => {
+    setModal(true);
+  };
+
+  const addBoard = (image: string, title: string, description: string): void => {
+    setBoardList((state) => [...state, { id: `${state.length + 1}`, image, title, description }]);
+  };
+
   return (
     <S.Boards>
-      <Header />
+      <Header onOpenModal={onOpenModal} />
       <S.CardsContainer>
-        {fakeCards.map(({ id, image, title, description }) => (
+        {boardList.map(({ id, image, title, description }) => (
           <div key={id}>
             <Link to={id}>
               <Card image={image} title={title} description={description} />
@@ -41,6 +58,7 @@ const Boards: React.FC = () => {
           </div>
         ))}
       </S.CardsContainer>
+      <BoardCreationForm addBoard={addBoard} onCloseModal={onCloseModal} modal={modal} />
     </S.Boards>
   );
 };

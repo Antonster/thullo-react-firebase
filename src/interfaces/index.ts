@@ -1,21 +1,20 @@
 import type { ReactElement } from 'react';
 
-export interface IMainButton {
-  icon?: ReactElement;
-  text: string;
-  type: 'button' | 'submit' | 'reset';
-  $style: 'primary' | 'secondary';
-  $size?: 'big' | 'small';
-  $fullWidth?: boolean;
-}
-
 export interface IStyledMainButton {
-  $style: 'primary' | 'secondary';
+  $style: 'primary' | 'secondary' | 'empty';
+  $gap?: string;
   $fullWidth?: boolean;
 }
 
 export interface IStyledMainButtonText {
   $size?: 'big' | 'small';
+}
+
+export interface IMainButton extends IStyledMainButton, IStyledMainButtonText {
+  icon?: ReactElement;
+  text: string;
+  type: 'button' | 'submit' | 'reset';
+  onClick?: () => void;
 }
 
 export interface IStyledWaiterSquare {
@@ -65,4 +64,14 @@ export interface IBoardsCard {
   image?: string;
   title: string;
   description?: string;
+}
+
+export interface IBoardsHeader {
+  onOpenModal: () => void;
+}
+
+export interface IBoardCreationForm {
+  onCloseModal: () => void;
+  addBoard: (image: string, title: string, description: string) => void;
+  modal: boolean;
 }

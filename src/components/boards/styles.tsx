@@ -61,7 +61,7 @@ export const Card = styled(MainWrapper)`
   transition: all 0.4s;
 
   &:hover {
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -102,4 +102,60 @@ export const CardDescription = styled.div`
   white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+export const ImageContainer = styled.div`
+  position: relative;
+`;
+
+export const ActiveImage = styled.img`
+  width: 100%;
+  height: 140px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin: 0 0 24px;
+`;
+
+export const ClearButton = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: -10px;
+  top: -10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #1aa3de;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.4s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+export const DropZone = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 140px;
+  border-radius: 12px;
+  color: #828282;
+  border: 2px dashed #828282;
+  transition: all 0.6s;
+  cursor: pointer;
+  margin: 0 0 24px;
+
+  &:hover {
+    color: #1aa3de;
+    border: 2px dashed #1aa3de;
+  }
 `;
