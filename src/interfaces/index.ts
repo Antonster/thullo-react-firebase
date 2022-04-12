@@ -52,6 +52,18 @@ export interface IAuthReducer {
   initialLoading: boolean;
 }
 
+export interface IBoards {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+}
+
+export interface IBoardsReducer {
+  boards: IBoards[] | undefined;
+  waiter: boolean;
+}
+
 export interface IStatusMessages {
   [key: string]: string;
 }
@@ -72,6 +84,15 @@ export interface IBoardsHeader {
 
 export interface IBoardCreationForm {
   onCloseModal: () => void;
-  addBoard: (image: string, title: string, description: string) => void;
   modal: boolean;
+}
+
+export interface IDropZone {
+  isDragAccept: boolean;
+}
+
+export interface IAddBoardData {
+  title: string;
+  description: string;
+  image: string;
 }

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { MainWrapper } from 'src/components/common';
 
+import type { IDropZone } from 'src/interfaces';
+
 export const Boards = styled.div`
   padding: 60px 12px;
   width: 1200px;
@@ -141,7 +143,15 @@ export const ClearButton = styled.div`
   }
 `;
 
-export const DropZone = styled.div`
+export const ModalInner = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const DropZone = styled.div<IDropZone>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -153,6 +163,13 @@ export const DropZone = styled.div`
   transition: all 0.6s;
   cursor: pointer;
   margin: 0 0 24px;
+  ${({ isDragAccept }) =>
+    isDragAccept
+      ? `
+        color: #1aa3de;
+        border: 2px dashed #1aa3de;
+      `
+      : ''}
 
   &:hover {
     color: #1aa3de;
