@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, query, orderBy, Timestamp } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 
 import { firebaseAuth, firestoreDb } from 'src/firebase';
@@ -15,13 +15,19 @@ onAuthStateChanged(firebaseAuth, (user) => {
 });
 
 export const getBoards = async (): Promise<any> => {
-  const snapshot = await getDocs(collection(firestoreDb, `boards_${userId}`));
+  const boardsRef = collection(firestoreDb, `users/${userId}/boards`);
+  const boardsSnap = await getDocs(query(boardsRef, orderBy('createTime', 'desc')));
 
-  return snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  return boardsSnap.docs.map((boardDoc) => {
+    const { title, description, image } = boardDoc.data();
+
+    return { title, description, image, id: boardDoc.id };
+  });
 };
 
 export const addBoard = async (data: IAddBoardData): Promise<any> => {
-  const reference = await addDoc(collection(firestoreDb, `boards_${userId}`), data);
+  const docData = { ...data, userId, createTime: Timestamp.now(), lastUpdateTime: Timestamp.now() };
+  const docRef = await addDoc(collection(firestoreDb, `users/${userId}/boards`), docData);
 
-  return reference.id;
+  return docRef.id;
 };

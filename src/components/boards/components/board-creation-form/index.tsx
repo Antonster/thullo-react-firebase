@@ -63,7 +63,7 @@ const BoardCreationForm: React.FC<IBoardCreationForm> = ({ modal, onCloseModal }
           <form onSubmit={handleSubmit}>
             {values.file ? (
               <S.ImageContainer>
-                <S.ActiveImage src={URL.createObjectURL(values.file[0])} alt="" />
+                <S.ActiveImage src={URL.createObjectURL(values.file[0])} />
                 <S.ClearButton onClick={onClearFile}>
                   <CloseRoundedIcon />
                 </S.ClearButton>

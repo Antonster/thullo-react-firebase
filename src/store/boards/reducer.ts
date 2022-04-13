@@ -22,7 +22,7 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getBoards.rejected, (state, action) => {
       state.waiter = false;
-      console.log(action.error.code);
+      alert(action.error.code);
     })
 
     .addCase(addBoard.pending, (state) => {
@@ -32,7 +32,7 @@ const reducer = createReducer(initialState, (builder) => {
       const { result } = action.payload;
 
       if (state.boards) {
-        state.boards = [...state.boards, result];
+        state.boards = [result, ...state.boards];
       } else {
         state.boards = [result];
       }
@@ -41,7 +41,7 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(addBoard.rejected, (state, action) => {
       state.waiter = false;
-      console.log(action.error.code);
+      alert(action.error.code);
     });
 });
 
