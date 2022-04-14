@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import GlobalStyle from 'src/global-styles';
 import { store } from 'src/store/store';
 import * as serviceWorker from 'src/serviceWorker';
-import 'src/firebase';
 
 import App from './App';
 

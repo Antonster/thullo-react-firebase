@@ -94,5 +94,10 @@ export interface IDropZone {
 export interface IAddBoardData {
   title: string;
   description: string;
-  image: string;
+  image: File | null;
+}
+
+export interface IAddBoardRequest {
+  title: string;
+  description: string;
 }
