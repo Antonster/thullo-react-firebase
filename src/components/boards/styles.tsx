@@ -75,6 +75,12 @@ export const CardImage = styled.img`
   object-fit: cover;
 `;
 
+export const EmptyCardImage = styled.div`
+  width: 100%;
+  height: 130px;
+  margin: 0 0 12px;
+`;
+
 export const CardTitle = styled.div`
   font-family: 'Noto Sans Display';
   font-weight: 500;
