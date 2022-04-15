@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   collection,
+  updateDoc,
   // getDocs,
   doc,
   getDoc,
@@ -14,7 +14,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 import { firebaseAuth, firestoreDb, storage } from 'src/firebase';
-import type { IAddBoardRequest, IBoards } from 'src/interfaces';
+import type { IAddBoardData, IBoards } from 'src/interfaces';
 
 let userId: string;
 
@@ -26,15 +26,12 @@ onAuthStateChanged(firebaseAuth, (user) => {
   }
 });
 
-export const uploadImage = async (image: File | null, id: string): Promise<string> => {
-  if (image) {
-    const storageRef = ref(storage, `images/${id}`);
-    uploadBytes(storageRef, image);
-
-    return URL.createObjectURL(image);
-  }
-
-  return '';
+export const uploadImage = async (image: File, id: string): Promise<void> => {
+  const storageRef = ref(storage, `images/${id}`);
+  await uploadBytes(storageRef, image);
+  const url = await getDownloadURL(storageRef);
+  const boardListRef = doc(firestoreDb, `users/${userId}/boards/${id}`);
+  await updateDoc(boardListRef, { image: url });
 };
 
 export const downloadImage = async (id: string): Promise<string> => {
@@ -57,14 +54,7 @@ export const getBoards = async (): Promise<IBoards[] | []> => {
         const boardSnap = await getDoc(boardRef);
 
         if (boardSnap.exists()) {
-          const { title, description } = boardSnap.data();
-          let image: string;
-
-          try {
-            image = await downloadImage(boardSnap.id);
-          } catch {
-            image = '';
-          }
+          const { title, description, image } = boardSnap.data();
 
           return { title, description, image, id: boardSnap.id };
         }
@@ -79,8 +69,14 @@ export const getBoards = async (): Promise<IBoards[] | []> => {
   return [];
 };
 
-export const addBoard = async (data: IAddBoardRequest): Promise<string> => {
-  const docData = { ...data, createTime: Timestamp.now(), lastUpdateTime: Timestamp.now() };
+export const addBoard = async (data: IAddBoardData): Promise<string> => {
+  const { title, description, image } = data;
+  const docData = {
+    title,
+    description,
+    createTime: Timestamp.now(),
+    lastUpdateTime: Timestamp.now(),
+  };
   const docRef = await addDoc(collection(firestoreDb, `users/${userId}/boards`), docData);
 
   const boardListRef = doc(firestoreDb, `users`, userId);
@@ -92,6 +88,10 @@ export const addBoard = async (data: IAddBoardRequest): Promise<string> => {
     await setDoc(boardListRef, { boardList: [docRef.id, ...boardList] });
   } else {
     await setDoc(boardListRef, { boardList: [docRef.id] });
+  }
+
+  if (image) {
+    uploadImage(image, docRef.id);
   }
 
   return docRef.id;

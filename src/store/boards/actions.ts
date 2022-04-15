@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import * as boardsAPI from 'src/api/boards';
 import { IAddBoardData } from 'src/interfaces';
@@ -13,8 +12,8 @@ export const getBoards = createAsyncThunk(ActionType.GET_BOARDS, async () => {
 
 export const addBoard = createAsyncThunk(ActionType.ADD_BOARD, async (data: IAddBoardData) => {
   const { title, description, image } = data;
-  const id = await boardsAPI.addBoard({ title, description });
-  const imageUrl = await boardsAPI.uploadImage(image, id);
+  const id = await boardsAPI.addBoard(data);
+  const imageUrl = image ? URL.createObjectURL(image) : image;
 
   const result = { id, title, description, image: imageUrl };
 

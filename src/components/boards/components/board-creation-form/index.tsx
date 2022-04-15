@@ -32,7 +32,7 @@ const BoardCreationForm: React.FC<IBoardCreationForm> = ({ modal, onCloseModal }
       onSubmit: (value) => {
         dispatch(
           boardsActionCreator.addBoard({
-            image: values.file ? values.file[0] : null,
+            image: values.file ? values.file[0] : '',
             title: value.title,
             description: value.description,
           }),
