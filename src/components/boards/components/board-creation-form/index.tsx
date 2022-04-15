@@ -1,3 +1,4 @@
+import { memo, useCallback } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
@@ -48,9 +49,9 @@ const BoardCreationForm: React.FC<IBoardCreationForm> = ({ modal, onCloseModal }
     },
   });
 
-  const onClearFile = () => {
+  const onClearFile = useCallback((): void => {
     setFieldValue('file', null);
-  };
+  }, [setFieldValue]);
 
   return (
     <Modal open={modal} onClose={onCloseModal}>
@@ -120,4 +121,4 @@ const BoardCreationForm: React.FC<IBoardCreationForm> = ({ modal, onCloseModal }
   );
 };
 
-export default BoardCreationForm;
+export default memo(BoardCreationForm);

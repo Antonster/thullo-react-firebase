@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Avatar from '@mui/material/Avatar';
@@ -25,18 +25,16 @@ const Header: React.FC = () => {
   const [tooltip, setTooltip] = useState(false);
   const isMobile = useMediaQuery('(max-width: 768px)');
 
-  const handleTooltipClose = () => {
+  const handleTooltipClose = useCallback((): void => {
     setTooltip(false);
-  };
-
-  const handleTooltipOpen = () => {
+  }, []);
+  const handleTooltipOpen = useCallback((): void => {
     setTooltip(true);
-  };
-
-  const signOut = async () => {
+  }, []);
+  const signOut = useCallback(async (): Promise<void> => {
     await dispatch(authActionCreator.signOut());
     navigate('/');
-  };
+  }, [dispatch, navigate]);
 
   return (
     <S.Header>

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import type { IMainButton } from 'src/interfaces';
 
 import * as S from './styles';
@@ -20,4 +21,4 @@ const MainButton: React.FC<IMainButton> = ({
   );
 };
 
-export default MainButton;
+export default memo(MainButton);

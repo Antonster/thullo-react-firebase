@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import * as S from './styles';
 
-export default S.MainLink;
+export default memo(S.MainLink);

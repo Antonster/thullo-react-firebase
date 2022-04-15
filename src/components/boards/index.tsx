@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'src/hooks';
@@ -13,12 +13,12 @@ const Boards: React.FC = () => {
   const { waiter, boards } = useAppSelector((root) => root.boards);
   const [modal, setModal] = useState(false);
 
-  const onCloseModal = (): void => {
+  const onCloseModal = useCallback((): void => {
     setModal(false);
-  };
-  const onOpenModal = (): void => {
+  }, []);
+  const onOpenModal = useCallback((): void => {
     setModal(true);
-  };
+  }, []);
 
   useEffect(() => {
     if (!boards) {

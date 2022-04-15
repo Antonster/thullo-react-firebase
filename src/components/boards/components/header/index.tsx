@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 
 import type { IBoardsHeader } from 'src/interfaces';
@@ -19,4 +20,4 @@ const Header: React.FC<IBoardsHeader> = ({ onOpenModal }) => {
   );
 };
 
-export default Header;
+export default memo(Header);

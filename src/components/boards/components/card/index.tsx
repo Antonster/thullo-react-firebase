@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import type { IBoardsCard } from 'src/interfaces';
 
 import * as S from '../../styles';
@@ -12,4 +13,4 @@ const Card: React.FC<IBoardsCard> = ({ image, title, description }) => {
   );
 };
 
-export default Card;
+export default memo(Card);

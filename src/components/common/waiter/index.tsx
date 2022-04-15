@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import type { IStyledWaiterSquare } from 'src/interfaces';
 
 import * as S from './styles';
@@ -15,4 +16,4 @@ const Waiter: React.FC<IStyledWaiterSquare> = ({ $size }) => {
   );
 };
 
-export default Waiter;
+export default memo(Waiter);

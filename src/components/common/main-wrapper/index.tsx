@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import * as S from './styles';
 
-export default S.MainWrapper;
+export default memo(S.MainWrapper);

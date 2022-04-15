@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import * as S from './styles';
 
-export default S.ContentContainer;
+export default memo(S.ContentContainer);
