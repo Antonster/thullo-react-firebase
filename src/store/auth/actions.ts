@@ -4,9 +4,9 @@ import * as authAPI from 'src/api/auth';
 import { IUserData, IResetPassword } from 'src/interfaces';
 import { ActionType } from './common';
 
-export const setUser = createAction(ActionType.GET_USER, (uid: string | undefined) => {
-  return { payload: { uid } };
-});
+export const setUser = createAction<string | undefined>(ActionType.GET_USER);
+
+export const clearStatuses = createAction(ActionType.CLEAR_ERRORS);
 
 export const createUser = createAsyncThunk(
   ActionType.CREATE_USER,
@@ -47,5 +47,3 @@ export const resetPassword = createAsyncThunk(
     await authAPI.resetPassword(actionCode, newPassword);
   },
 );
-
-export const clearStatuses = createAction(ActionType.CLEAR_ERRORS);

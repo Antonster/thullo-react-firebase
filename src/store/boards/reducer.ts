@@ -23,8 +23,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(getBoards.rejected, (state, action) => {
       state.waiter = false;
       alert(action.error.message);
-    })
+    });
 
+  builder
     .addCase(addBoard.pending, (state) => {
       state.waiter = true;
     })

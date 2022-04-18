@@ -25,15 +25,13 @@ const initialState: IAuthReducer = {
 };
 
 const reducer = createReducer(initialState, (builder) => {
+  builder.addCase(setUser, (state, action) => {
+    state.login = action.payload;
+    state.waiter = false;
+    state.initialLoading = false;
+  });
+
   builder
-    .addCase(setUser, (state, action) => {
-      const { uid } = action.payload;
-
-      state.login = uid;
-      state.waiter = false;
-      state.initialLoading = false;
-    })
-
     .addCase(createUser.pending, (state) => {
       state.waiter = true;
     })
@@ -46,8 +44,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(createUser.rejected, (state, action) => {
       state.waiter = false;
       state.createUserStatus = action.error.code;
-    })
+    });
 
+  builder
     .addCase(signIn.pending, (state) => {
       state.waiter = true;
     })
@@ -60,8 +59,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(signIn.rejected, (state, action) => {
       state.waiter = false;
       state.signInStatus = action.error.code;
-    })
+    });
 
+  builder
     .addCase(signOut.pending, (state) => {
       state.waiter = true;
     })
@@ -72,8 +72,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(signOut.rejected, (state, action) => {
       state.waiter = false;
       state.signOutStatus = action.error.code;
-    })
+    });
 
+  builder
     .addCase(sendPasswordResetEmail.pending, (state) => {
       state.waiter = true;
     })
@@ -84,8 +85,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(sendPasswordResetEmail.rejected, (state, action) => {
       state.waiter = false;
       state.sendPasswordResetEmailStatus = action.error.code;
-    })
+    });
 
+  builder
     .addCase(verifyCode.pending, (state) => {
       state.waiter = true;
     })
@@ -95,8 +97,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(verifyCode.rejected, (state, action) => {
       state.waiter = false;
       state.resetPasswordStatus = action.error.code;
-    })
+    });
 
+  builder
     .addCase(resetPassword.pending, (state) => {
       state.waiter = true;
     })
@@ -107,15 +110,15 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(resetPassword.rejected, (state, action) => {
       state.waiter = false;
       state.resetPasswordStatus = action.error.code;
-    })
-
-    .addCase(clearStatuses, (state) => {
-      state.createUserStatus = undefined;
-      state.signInStatus = undefined;
-      state.signOutStatus = undefined;
-      state.sendPasswordResetEmailStatus = undefined;
-      state.resetPasswordStatus = undefined;
     });
+
+  builder.addCase(clearStatuses, (state) => {
+    state.createUserStatus = undefined;
+    state.signInStatus = undefined;
+    state.signOutStatus = undefined;
+    state.sendPasswordResetEmailStatus = undefined;
+    state.resetPasswordStatus = undefined;
+  });
 });
 
 export { reducer };
