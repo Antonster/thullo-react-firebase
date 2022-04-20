@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { auth, boards } from './rootReducer';
+import { auth, boards } from './root-reducer';
 
 export const store = configureStore({
   reducer: {
